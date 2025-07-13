@@ -1,4 +1,4 @@
-export default footer = () => {
+export default Footer = () => {
   return (
     <footer>
       <p>© 2023 City Lovers</p>

@@ -9,7 +9,7 @@ function Services() {
       }}
     >
       <img
-        src="https://media.istockphoto.com/id/686952826/photo/fruit-nut.jpg?s=1024x1024&w=is&k=20&c=i2UnnAKnSJJuUnmz7MACXCKCBBKrw9e84eFeJYBnpmA="
+        src="https://media.istockphoto.com/id/2015507439/photo/martech-marketing-technology-concept-businessman-touching-network-connection-on-online.jpg?s=612x612&w=0&k=20&c=9OY3YmOFvGPH-yq7g1zuD7XcUyWr45K_8ONvN2m8F30="
         alt="dont go"
         style={{ maxWidth: "100%", marginTop: "1rem" }}
       />

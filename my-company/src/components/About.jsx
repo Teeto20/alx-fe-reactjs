@@ -12,9 +12,15 @@ function About() {
         About Us
       </h1>
       <p style={{ color: "#666", lineHeight: "1.5" }}>
-        Our company has been providing top-notch services since 1990. We specialize in various fields including technology, marketing, and consultancy.
+        Our company has been providing top-notch services since 1990. We
+        specialize in various fields including technology, marketing, and
+        consultancy.
       </p>
-      <img src="https://media.istockphoto.com/id/1091144006/photo/cashew-fruit-isolated-on-white-background.jpg?s=1024x1024&w=is&k=20&c=xiVL4Hckzt93N_NIpeXttBsRjUPNBhnDIenT-QeMRFU=" alt="new" style={{ maxWidth: '100%', marginTop: '1rem' }} />
+      <img
+        src="https://www.shutterstock.com/image-photo/it-information-technology-concept-consultant-600nw-2545256499.jpg"
+        alt="new"
+        style={{ maxWidth: "100%", marginTop: "1rem" }}
+      />
     </div>
   );
 }

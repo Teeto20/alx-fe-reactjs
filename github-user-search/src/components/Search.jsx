@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import { fetchAdvancedUsers } from "../services/api";
 function Search({ onSearch }) {
   const [username, setUsername] = useState("");
   const [users, setUsers] = useState([]);
@@ -11,13 +11,13 @@ function Search({ onSearch }) {
     e.preventDefault();
     onSearch({ username, location, minRepos });
   };
-  const handleSearch = async (username) => {
+  const handleSearch = async (filters) => {
     setLoading(true);
     setError("");
     setUsers([]);
 
     try {
-      const data = await fetchUserData(username);
+      const data = await fetchAdvancedUsers(filters);
       setUsers(data);
     } catch (err) {
       setError("Looks like we cant find the user");
@@ -49,8 +49,12 @@ function Search({ onSearch }) {
           placeholder="Minimum Repositories (optional)"
           className="border rounded px-3 py-2 w-full"
         />
-        <button type="submit"
-        className="bg-blue-600 text-white px-4 py-2 rounded w-full">Search</button>
+        <button
+          type="submit"
+          className="bg-blue-600 text-white px-4 py-2 rounded w-full"
+        >
+          Search
+        </button>
       </form>
       <Search onSearch={handleSearch} />
 
@@ -59,16 +63,24 @@ function Search({ onSearch }) {
 
       {users.map((user) => (
         <div key={user.id} className="border rounded p-4 rounded shadow">
-          <img src={user.avatar_url} alt={user.login} width={60} className="rounded-full" />
+          <img
+            src={user.avatar_url}
+            alt={user.login}
+            width={60}
+            className="rounded-full"
+          />
           <h2>{user.login}</h2>
           <p>{user.bio}</p>
-          <a href={user.html_url} target="_blank" rel="noreferrer"
-          className="text-blue-500 underline">
+          <a
+            href={user.html_url}
+            target="_blank"
+            rel="noreferrer"
+            className="text-blue-500 underline"
+          >
             View GitHub Profile
           </a>
         </div>
       ))}
-      
     </div>
   );
 }

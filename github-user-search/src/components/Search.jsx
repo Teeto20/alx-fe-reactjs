@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { fetchAdvancedUsers } from "../services/api";
+import { fetchUserData } from "../services/api";
 function Search({ onSearch }) {
   const [username, setUsername] = useState("");
   const [users, setUsers] = useState([]);
@@ -17,7 +17,7 @@ function Search({ onSearch }) {
     setUsers([]);
 
     try {
-      const data = await fetchAdvancedUsers(filters);
+      const data = await fetchUserData(filters);
       setUsers(data);
     } catch (err) {
       setError("Looks like we cant find the user");

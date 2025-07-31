@@ -7,10 +7,7 @@ function Search({ onSearch }) {
   const [error, setError] = useState("");
   const [location, setLocation] = useState("");
   const [minRepos, setMinRepos] = useState("");
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSearch({ username, location, minRepos });
-  };
+ 
   const handleSearch = async (filters) => {
     setLoading(true);
     setError("");
@@ -25,6 +22,12 @@ function Search({ onSearch }) {
       setLoading(false);
     }
   };
+  // ...existing code...
+const handleSubmit = (e) => {
+  e.preventDefault();
+  handleSearch({ username, location, minRepos });
+};
+// ...existing code...
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -33,7 +36,7 @@ function Search({ onSearch }) {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           placeholder="Enter GitHub username"
-          className="border rouned px-3 py-2 w-full"
+          className="border rounded px-3 py-2 w-full"
         />
         <input
           type="text"
@@ -56,7 +59,6 @@ function Search({ onSearch }) {
           Search
         </button>
       </form>
-      <Search onSearch={handleSearch} />
 
       {loading && <p>Loading...</p>}
       {error && <p>{error}</p>}

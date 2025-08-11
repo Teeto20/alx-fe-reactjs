@@ -3,13 +3,14 @@ import { useState } from "react";
 function AddRecipeForm({ onAddRecipe }) {
   const [title, setTitle] = useState("");
   const [ingredients, setIngredients] = useState("");
+  const [steps, setSteps] = useState("");
   const [error, setError] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     // Validation: fields not empty and at least 2 ingredients
-    if (!title.trim() || !ingredients.trim()) {
+    if (!title.trim() || !ingredients.trim() || !steps.trim()) {
       setError("All fields are required.");
       return;
     }
@@ -18,13 +19,19 @@ function AddRecipeForm({ onAddRecipe }) {
       setError("Please enter at least two ingredients, separated by commas.");
       return;
     }
+    const stepsList = steps.split("\n").map((s) => s.trim()).filter(Boolean);
+    if (stepsList.length < 1) {
+      setError("Please enter at least one step.");
+      return;
+    }
 
     setError("");
     if (onAddRecipe) {
-      onAddRecipe({ title, ingredients: ingredientList });
+      onAddRecipe({ title, ingredients: ingredientList, instructions: stepsList });
     }
     setTitle("");
     setIngredients("");
+    setSteps("");
   };
 
   return (
@@ -49,6 +56,17 @@ function AddRecipeForm({ onAddRecipe }) {
         <textarea
           value={ingredients}
           onChange={(e) => setIngredients(e.target.value)}
+          className="mt-1 block w-full border border-gray-300 rounded-md p-2"
+          required
+        />
+      </div>
+      <div>
+        <label className="block text-sm font-medium">
+          Steps <span className="text-xs text-gray-500">(one per line)</span>
+        </label>
+        <textarea
+          value={steps}
+          onChange={(e) => setSteps(e.target.value)}
           className="mt-1 block w-full border border-gray-300 rounded-md p-2"
           required
         />

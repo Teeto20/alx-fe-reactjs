@@ -3,12 +3,40 @@
     "id": 1,
     "title": "Spaghetti Carbonara",
     "summary": "A classic Italian pasta dish with eggs, cheese, bacon, and black pepper.",
-    "image": "https://www.allrecipes.com/thmb/a_0W8yk_LLCtH-VPqg2uLD9I5Pk=/0x512/filters:no_upscale():max_bytes(150000):strip_icc()/11973-spaghetti-carbonara-ii-DDMFS-4x3-6edea51e421e4457ac0c3269f3be5157.jpg"
+    "image": "https://www.allrecipes.com/thmb/a_0W8yk_LLCtH-VPqg2uLD9I5Pk=/0x512/filters:no_upscale():max_bytes(150000):strip_icc()/11973-spaghetti-carbonara-ii-DDMFS-4x3-6edea51e421e4457ac0c3269f3be5157.jpg",
+    "ingredients": [
+      "spaghetti",
+      "eggs",
+      "parmesan cheese",
+      "pancetta",
+      "black pepper"
+    ],
+    "instructions": [
+      "Cook spaghetti according to package instructions.",
+      "In a bowl, whisk together eggs and cheese.",
+      "In a pan, cook pancetta until crispy.",
+      "Combine hot pasta with egg mixture and pancetta.",
+      "Serve immediately with extra cheese and pepper."
+    ]
   },
   {
     "id": 2,
     "title": "Chicken Tikka Masala",
     "summary": "Chunks of grilled chicken (tikka) cooked in a smooth buttery & creamy tomato based gravy.",
-    "image": "https://bellyfull.net/wp-content/uploads/2021/05/Chicken-Tikka-Masala-blog.jpg"
+    "image": "https://bellyfull.net/wp-content/uploads/2021/05/Chicken-Tikka-Masala-blog.jpg",
+    "ingredients": [
+      "chicken",
+      "yogurt",
+      "garam masala",
+      "tomato puree",
+      "cream"
+    ],
+    "instructions": [
+      "Marinate chicken in yogurt and spices.",
+      "Grill chicken until cooked through.",
+      "In a pan, sauté onions and garlic.",
+      "Add tomato puree and cream, then stir in chicken.",
+      "Simmer until thickened and serve with rice."
+    ]
   }
 ]

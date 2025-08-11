@@ -4,29 +4,41 @@ function AddRecipeForm({ onAddRecipe }) {
   const [title, setTitle] = useState("");
   const [ingredients, setIngredients] = useState("");
   const [steps, setSteps] = useState("");
-  const [error, setError] = useState("");
+  const [errors, setErrors] = useState({});
+
+  const validate = () => {
+    const newErrors = {};
+    if (!title.trim()) newErrors.title = "Title is required.";
+    if (!ingredients.trim()) {
+      newErrors.ingredients = "Ingredients are required.";
+    } else {
+      const ingredientList = ingredients.split(",").map((i) => i.trim()).filter(Boolean);
+      if (ingredientList.length < 2) {
+        newErrors.ingredients = "Please enter at least two ingredients, separated by commas.";
+      }
+    }
+    if (!steps.trim()) {
+      newErrors.steps = "Steps are required.";
+    } else {
+      const stepsList = steps.split("\n").map((s) => s.trim()).filter(Boolean);
+      if (stepsList.length < 1) {
+        newErrors.steps = "Please enter at least one step.";
+      }
+    }
+    return newErrors;
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // Validation: fields not empty and at least 2 ingredients
-    if (!title.trim() || !ingredients.trim() || !steps.trim()) {
-      setError("All fields are required.");
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
       return;
     }
-    const ingredientList = ingredients.split(",").map((i) => i.trim()).filter(Boolean);
-    if (ingredientList.length < 2) {
-      setError("Please enter at least two ingredients, separated by commas.");
-      return;
-    }
-    const stepsList = steps.split("\n").map((s) => s.trim()).filter(Boolean);
-    if (stepsList.length < 1) {
-      setError("Please enter at least one step.");
-      return;
-    }
-
-    setError("");
+    setErrors({});
     if (onAddRecipe) {
+      const ingredientList = ingredients.split(",").map((i) => i.trim()).filter(Boolean);
+      const stepsList = steps.split("\n").map((s) => s.trim()).filter(Boolean);
       onAddRecipe({ title, ingredients: ingredientList, instructions: stepsList });
     }
     setTitle("");
@@ -36,9 +48,6 @@ function AddRecipeForm({ onAddRecipe }) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      {error && (
-        <div className="text-red-600 text-sm font-medium">{error}</div>
-      )}
       <div>
         <label className="block text-sm font-medium">Title</label>
         <input
@@ -48,6 +57,7 @@ function AddRecipeForm({ onAddRecipe }) {
           className="mt-1 block w-full border border-gray-300 rounded-md p-2"
           required
         />
+        {errors.title && <div className="text-red-600 text-sm">{errors.title}</div>}
       </div>
       <div>
         <label className="block text-sm font-medium">
@@ -59,6 +69,7 @@ function AddRecipeForm({ onAddRecipe }) {
           className="mt-1 block w-full border border-gray-300 rounded-md p-2"
           required
         />
+        {errors.ingredients && <div className="text-red-600 text-sm">{errors.ingredients}</div>}
       </div>
       <div>
         <label className="block text-sm font-medium">
@@ -70,6 +81,7 @@ function AddRecipeForm({ onAddRecipe }) {
           className="mt-1 block w-full border border-gray-300 rounded-md p-2"
           required
         />
+        {errors.steps && <div className="text-red-600 text-sm">{errors.steps}</div>}
       </div>
       <button
         type="submit"
@@ -81,5 +93,4 @@ function AddRecipeForm({ onAddRecipe }) {
     </form>
   );
 }
-
 export default AddRecipeForm;

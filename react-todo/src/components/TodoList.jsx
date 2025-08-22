@@ -1,17 +1,18 @@
 import React, { useState } from "react";
-import AddTodoForm from "./AddTodoForm";
 
-const initialTodos = [
-  { id: 1, text: "Learn React", completed: false },
-  { id: 2, text: "Build a Todo App", completed: false },
-];
+const TodoList = () => {
+  const [todos, setTodos] = useState([
+    { id: 1, text: "Learn React", completed: false },
+    { id: 2, text: "Build Todo App", completed: true },
+  ]);
 
-export default function TodoList() {
-  const [todos, setTodos] = useState(initialTodos);
+  const [newTodo, setNewTodo] = useState("");
 
-  const addTodo = (text) => {
-    const newTodo = { id: Date.now(), text, completed: false };
-    setTodos([...todos, newTodo]);
+  const addTodo = (e) => {
+    e.preventDefault();
+    if (!newTodo.trim()) return;
+    setTodos([...todos, { id: Date.now(), text: newTodo, completed: false }]);
+    setNewTodo("");
   };
 
   const toggleTodo = (id) => {
@@ -29,25 +30,29 @@ export default function TodoList() {
   return (
     <div>
       <h1>Todo List</h1>
-      <AddTodoForm addTodo={addTodo} />
+
+      <form onSubmit={addTodo}>
+        <input
+          type="text"
+          placeholder="Add todo..."
+          value={newTodo}
+          onChange={(e) => setNewTodo(e.target.value)}
+        />
+        <button type="submit">Add</button>
+      </form>
+
       <ul>
         {todos.map((todo) => (
           <li
             key={todo.id}
             onClick={() => toggleTodo(todo.id)}
             style={{
-              textDecoration: todo.completed ? "line-through" : "none",
               cursor: "pointer",
+              textDecoration: todo.completed ? "line-through" : "none",
             }}
           >
             {todo.text}
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                deleteTodo(todo.id);
-              }}
-              data-testid={`delete-btn-${todo.id}`}
-            >
+            <button onClick={(e) => { e.stopPropagation(); deleteTodo(todo.id); }}>
               Delete
             </button>
           </li>
@@ -55,4 +60,6 @@ export default function TodoList() {
       </ul>
     </div>
   );
-}
+};
+
+export default TodoList;

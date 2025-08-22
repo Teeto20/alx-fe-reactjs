@@ -2,27 +2,18 @@ import { useState } from "react";
 
 function RegistrationForms() {
     //State for each field
-    const [formData, setFormData] = useState({
-        username: "",
-        email: "",
-        password: "",
-    });
+    const [username, setUsername] =useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     
     const [errors, setErrors] = useState("");
 
-    //Handle change for each input
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name]: value,
-        });
-    };
+    
 //Handle form submission
 const handleSubmit = async (e) => {
     e.preventDefault();
     //basic validation
-    if (!formData.username || !formData.email || !formData.password) {
+    if (!username || !email || !password) {
         setErrors("All fields are required");
         return;
     }
@@ -33,7 +24,7 @@ const handleSubmit = async (e) => {
         const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(formData),
+            body: JSON.stringify(username, email, password),
         });
         const data = await response.json();
         console.log("User registered:", data);
@@ -54,8 +45,8 @@ return (
             <input
                 type="text"
                 name="username"
-                value={formData.username}
-                onChange={handleChange}
+                value={username}
+                onChange={(e)=>setUsername(e.target.value)}
                 className="border p-2 w-full"
             />
             
@@ -65,8 +56,8 @@ return (
             <input
                 type="email"
                 name="email"
-                value={formData.email}
-                onChange={handleChange}
+                value={email}
+                onChange={(e)=>setEmail(e.target.value)}
                 className="border p-2 w-full"
             />
         </div>
@@ -75,8 +66,8 @@ return (
             <input
                 type="password"
                 name="password"
-                value={formData.password}
-                onChange={handleChange}
+                value={password}
+                onChange={(e)=>setPassword(e.target.value)}
                 className="border p-2 w-full"
             />
         </div>

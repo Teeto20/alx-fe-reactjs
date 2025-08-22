@@ -3,8 +3,8 @@ import React from "react";
 import { useParams } from "react-router-dom";
 
 function BlogPost() {
-  const { id } = useParams();
-  return <h2>Blog Post ID: {id}</h2>;
+  const { postId } = useParams();
+  return <h2>Viewing Blog Post #{postId}</h2>;
 }
 
 export default BlogPost;

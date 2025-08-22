@@ -6,13 +6,8 @@ const AuthContext = createContext(null);
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
 
-  const login = (username) => {
-    setUser({ name: username });
-  };
-
-  const logout = () => {
-    setUser(null);
-  };
+  const login = (username = "DemoUser") => setUser({ name: username });
+  const logout = () => setUser(null);
 
   return (
     <AuthContext.Provider value={{ user, login, logout }}>
@@ -21,6 +16,7 @@ export function AuthProvider({ children }) {
   );
 }
 
+// Hook
 export function useAuth() {
   return useContext(AuthContext);
 }

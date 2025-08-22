@@ -1,23 +1,24 @@
 // components/Profile.jsx
 import React from "react";
-import { Link, Routes, Route } from "react-router-dom";
-import ProfileDetails from "./ProfileDetails";
-import ProfileSettings from "./ProfileSettings";
+import { Link, Outlet } from "react-router-dom";
+import { useAuth } from "../auth/AuthContext";
 
 function Profile() {
+  const { user, logout } = useAuth();
+
   return (
     <div>
       <h2>Profile Page</h2>
+      <p>Welcome, {user?.name}!</p>
+      <button onClick={logout}>Logout</button>
+
       <nav>
         <Link to="details">Details</Link> |{" "}
         <Link to="settings">Settings</Link>
       </nav>
 
-      {/* Nested Routes */}
-      <Routes>
-        <Route path="details" element={<ProfileDetails />} />
-        <Route path="settings" element={<ProfileSettings />} />
-      </Routes>
+      {/* Nested content */}
+      <Outlet />
     </div>
   );
 }

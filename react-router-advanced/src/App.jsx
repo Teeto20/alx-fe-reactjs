@@ -15,8 +15,7 @@ function App() {
     <AuthProvider>
       <Router>
         <nav style={{ marginBottom: "1rem" }}>
-          <Link to="/">Home</Link> |{" "}
-          <Link to="/profile">Profile</Link> |{" "}
+          <Link to="/">Home</Link> | <Link to="/profile">Profile</Link> |{" "}
           <Link to="/login">Login</Link> |{" "}
           <Link to="/posts/42">Dynamic Blog Post</Link>
         </nav>
@@ -40,7 +39,7 @@ function App() {
           </Route>
 
           {/* Dynamic route for blog posts */}
-          <Route path="/posts/:postId" element={<BlogPost />} />
+          <Route path="/blog/:id" element={<BlogPost />} />
         </Routes>
       </Router>
     </AuthProvider>
